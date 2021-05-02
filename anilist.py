@@ -245,20 +245,23 @@ def match_to_plex(anilist_series: List[AnilistSeries], plex_series_watched: List
                 plex_title_original_clean_without_year = plex_title_original_clean
 
                 try:
-                    if "(" in plex_title and ")" in plex_title:
-                        year = re.search(r"(\d{4})", plex_title).group(1)
+                    year_search_plex_title = re.search(r"(\d{4})", plex_title)
+                    if year_search_plex_title:
+                        year = year_search_plex_title.group(1)
                         year_string = f"({year})"
                         plex_title_clean_without_year = plex_title.replace(
                             year_string, ""
                         ).strip()
-                    if "(" in plex_title_sort and ")" in plex_title_sort:
-                        year = re.search(r"(\d{4})", plex_title_sort).group(1)
+                    year_search_plex_title_sort = re.search(r"(\d{4})", plex_title_sort)
+                    if year_search_plex_title_sort:
+                        year = year_search_plex_title_sort.group(1)
                         year_string = f"({year})"
                         plex_title_sort_clean_without_year = plex_title_sort.replace(
                             year_string, ""
                         ).strip()
-                    if "(" in plex_title_original and ")" in plex_title_original:
-                        year = re.search(r"(\d{4})", plex_title_original).group(1)
+                    year_search_plex_title_original = re.search(r"(\d{4})", plex_title_original)
+                    if year_search_plex_title_original:
+                        year = year_search_plex_title_original.group(1)
                         year_string = f"({year})"
                         plex_title_original_clean_without_year = plex_title_original.replace(
                             year_string, ""
