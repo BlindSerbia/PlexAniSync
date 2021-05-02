@@ -273,9 +273,7 @@ def get_watched_shows(shows: List[Show]) -> Optional[List[PlexWatchedSeries]]:
 
 
 def get_watched_episodes_for_show_season(season: Season) -> int:
-    watched_episodes_of_season: List[Episode] = season.watched()
-    # len(watched_episodes_of_season) only works when the user didn't skip any episodes
-    episodes_watched = max(map(lambda e: int(e.index), watched_episodes_of_season), default=0)
+    episodes_watched = max(episode.index for episode in season.episodes() if episode.isWatched)
 
     logger.info(f'[PLEX] {episodes_watched} episodes watched for {season.parentTitle} season {season.seasonNumber}')
     return episodes_watched
